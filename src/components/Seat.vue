@@ -105,7 +105,7 @@ body {
   padding-right: 300px;
 }
 
-.is-link:active {
+.is-link {
   pointer-events: none;
 }
 .btn.disabled,
