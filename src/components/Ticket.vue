@@ -4,8 +4,9 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Prompt"
     />
-
-    <h5 class="title3">{{ movie.title }}</h5>
+    <br /><br /><br />
+    <h4 class="title3">{{ movie.title }}</h4>
+    <br />
     <img
       v-bind:src="'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path"
       width="25%"
@@ -23,8 +24,6 @@
         <small>ไม่ว่าง</small>
       </li>
 
-      
-      
       <li>
         <div class="seat selected"></div>
         <small>ที่นั่งของเรา</small>
@@ -41,12 +40,11 @@
     <h5 id="price">
       จำนวนที่นั่ง : {{ status.count }}, ราคา : {{ status.price }}
     </h5>
-    <button class="buy" type="button" @click="alert" >Buy Ticket</button>
-    <!-- <button class="buy">Buy Ticket</button> -->
+    <br />
+    <button class="buy" type="button" @click="alert">ซื้อตั๋ว</button>
   </div>
 </template>
 <script>
-// import { initializeApp } from "firebase/app";
 import firebase from "firebase/compat/app";
 import "firebase/auth";
 import "firebase/firestore";
@@ -54,7 +52,7 @@ import "firebase/compat/database";
 import _ from "lodash";
 import { pushToArray } from "../other/lib";
 import axios from "axios";
-// import Movie from '../components/round.vue'
+
 import movies from "../components/round.vue";
 import Seat from "../components/Seat.vue";
 
@@ -69,11 +67,8 @@ const config = {
 };
 
 firebase.initializeApp(config);
-// const app = initializeApp(config);
 
 const db = firebase.database();
-// const dbRef = db.ref('/')
-// dbRef.push('yyy')
 
 export default {
   name: "Ticket",
@@ -100,7 +95,7 @@ export default {
         }
       }
       this.movieId = movieId;
-      
+
       const movieRef = db.ref(`${this.movie.id}`).child(this.movieId);
       movieRef.on("value", (snapshot) => {
         console.log(snapshot.val());
@@ -108,38 +103,11 @@ export default {
         this.firebaseSeats = [];
 
         _.forOwn(seats, (s) => {
-          //  console.log(s)
           pushToArray(s, this.firebaseSeats);
         });
-
-        //  console.log(this.firebaseSeats.length)
       });
-
-      //  const movieRef = db.ref('/').child(this.movieId)
-      //  movieRef.on('value', snapshot => {
-      //     //  console.log(snapshot.val())
-      //      const seats = snapshot.val()
-      //      this.firebaseSeats = []
-
-      //      _.forOwn(seats, s => {
-      //          pushToArray(s, this.firebaseSeats)
-      //      })
-      //      console.log(this.firebaseSeats.length)
-      //  })
     },
     handleChooseSeat(seat) {
-      //  const ids = this.selectSeats.map(s => s.id )
-      //  const idx = ids.indexOf(seat.id)
-      //  if(idx === -1 ){
-      //       this.selectSeats.push(seat)
-      //  }else{
-      //      this.selectSeats.splice(idx, 1)
-      //  }
-
-      //  pushToArray( seat, this.selectSeats)
-
-      //  const movieRef = db.ref().child(this.movieId)
-      //  movieRef.push(seat)
       pushToArray(seat, this.selectSeats);
 
       const movieRef = db.ref(`${this.movie.id}`).child(this.movieId);
@@ -157,13 +125,20 @@ export default {
       console.log(this.selectSeat.length);
     },
     alert() {
-        // "Thank You for buy ticket, you ticket price is" + this.status.price
-        this.$swal('Good job!',
-                   'You clicked the button!'+ this.status.price,
-                   'success')
-        .then(function(){
-           location.reload()
-        })
+      if (this.status.count > 0) {
+        this.$swal(
+          "คำสั่งซื้อสำเร็จ!",
+          "จำนวนตั๋ว " +
+            this.status.count +
+            " รวมเป็นเงิน " +
+            this.status.price,
+          "success"
+        ).then(function() {
+          location.reload();
+        });
+      } else {
+        this.$swal("กรุณาเลือกที่นั่ง", "", "warning");
+      }
     },
   },
   mounted() {
@@ -180,19 +155,6 @@ export default {
       .then((res) => {
         this.movie = res.data;
       });
-    // axios
-    //   .get("https://api.themoviedb.org/3/movie/" + this.$route.params.id, {
-    //     params: {
-    //       api_key: "46d234cc6703473b204fdcae0ed69364",
-    //       language: "th-TH",
-    //       sort_by: "popularity.desc",
-    //       page: "1",
-    //       year: "2021",
-    //     },
-    //   })
-    //   .then((res) => {
-    //     this.movieTH = res.data;
-    //   });
   },
 };
 </script>
@@ -204,19 +166,22 @@ export default {
 }
 .buy {
   transition-duration: 0.4s;
-  background-color: white; /* Green */
+  background-color: rgb(129, 162, 255);
   border: none;
+  border-radius: 5px;
   color: black;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
+  height: 5%;
+  width: 8%;
   display: inline-block;
   font-size: 16px;
   text-transform: uppercase;
   margin-bottom: 40px;
 }
 .buy:hover {
-  background-color: lightgray; /* Green */
+  background-color: lightgray;
   color: black;
 }
 .title2 {
@@ -240,10 +205,11 @@ export default {
 }
 
 .seat.selected {
-  background-color:#2acf75;
+  background-color: #2acf75;
 }
+
 .seat.occupied {
-  background-color: rgb(105, 105, 105);
+  background-color:#223388;
 }
 
 .showcase {
@@ -252,7 +218,6 @@ export default {
   padding: 5px 10px;
   display: inline-flex;
   color: #777;
-
   border-radius: 5px;
 }
 .showcase li {
@@ -273,14 +238,16 @@ export default {
   transform: scale(1.2);
 }
 
-.swal2-html-container{
-  background-color:white ;
+.swal2-html-container {
+  background-color: white;
+  font-size: 16px;
+  font-family: "Prompt", sans-serif;
 }
-div.swal2-actions{
-  background-color:white ;
+div.swal2-actions {
+  background-color: white;
 }
 
-div.swal2-icon .swal2-success .swal2-icon-show{
-  background-color:none ;
+div.swal2-icon .swal2-success .swal2-icon-show {
+  background-color: none;
 }
 </style>

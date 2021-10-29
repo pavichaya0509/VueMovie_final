@@ -10,7 +10,7 @@ export default new Vuex.Store({
   },
   mutations: {
     setMovie(state, payload) {
-      // console.log(payload)
+
       state.movie = payload;
     },
   },
@@ -31,11 +31,7 @@ export default new Vuex.Store({
           state.commit("setMovie", res.data.results);
           console.log(res);
         });
-      // const response = await fetch(url+payload, {Header});
-      // const data = await response.json();
-      // const res = data.results;
-      // state.commit('setMovie', res);
-      // console.log(res)
+
     },
   },
   modules: {},

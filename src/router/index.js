@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import Home from '../views/Home.vue'
 
 import Ticket from '../components/Ticket.vue'
 import movie from '../components/movie.vue'

@@ -10,9 +10,7 @@
     >
       {{ s.id }} {{ s.price }}
     </button>
-    <!-- > {{s.id}} {{s.price}}  </button>  -->
   </div>
-  <!-- <span> {{selectSeats}} </span> -->
 </template>
 <script>
 import movie from "../other/movie.json";
@@ -29,7 +27,7 @@ export default {
       return [
         "button",
         {
-          dark: seat.seated,
+          "dis is-link btn disabled": seat.seated,
           "is-success": idx != -1,
           "is-link btn disabled": firebaseIdx != -1 && idx === -1,
         },
@@ -73,7 +71,6 @@ body {
   appearance: none;
 }
 #seat {
-  /* text-indent: -9999px;  */
   border-style: ridge;
   height: 50px;
   width: 75px;
@@ -85,18 +82,7 @@ body {
 #row {
   display: flex;
 }
-/* #seat#selected{
-    background-color:greenyellow;
-}
-#seat#occupied{
-    background-color:red;
-} */
-/* #seat:nth-of-type(2){
-    margin-right: 18px;
-}
-#seat:nth-last-of-type(2){
-    margin-left: 18px;
-} */
+
 .box {
   background-color: rgb(0, 0, 0);
 }
@@ -106,7 +92,7 @@ body {
 }
 
 .is-link:active {
-  pointer-events: none !important;
+  pointer-events: none;
 }
 .btn.disabled,
 .btn[disabled],

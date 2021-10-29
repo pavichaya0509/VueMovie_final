@@ -4,10 +4,10 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Prompt"
     />
-    <br><br>
-    
+    <br /><br />
+
     <div>
-      <a class="text">
+      <p class="text">
         WELCOME
         <vue-typer
           :text="['MAJOR CINEPLEX']"
@@ -22,12 +22,11 @@
           :erase-on-complete="false"
           caret-animation="phase"
         ></vue-typer
-      ></a>
+      ></p>
     </div>
-    <!-- <b-table striped hover :items="movieData"> </b-table> -->
+
     <div class="go">
       <form @submit="addMovie">
-        
         <b-card
           bg-variant="danger"
           text-variant="white"
@@ -40,9 +39,7 @@
           tag="article"
           style="max-width: 260px; margin:10px boder:none;"
           class="mb-2 border-0"
-          
         >
-          <!-- <button type="submit" class="primary"   v-bind:href="'/ticket/' + item.id">จองตั๋ว</button> -->
           <b-button
             type="submit"
             variant="danger"
@@ -52,12 +49,10 @@
           >
         </b-card>
       </form>
-      
     </div>
   </div>
 </template>
 <script>
-// import axios from "axios";
 import Router from "vue-router";
 const router = new Router({
   mode: "history",
@@ -71,11 +66,9 @@ export default {
   },
   mounted() {
     this.$store.dispatch("fetchSetMovie");
-    // this.saveID {this.$store.getters.getMovie.id = this.$route.params.id } ;
   },
   methods: {
     addMovie() {
-      // router.push(`/ticket/${this.saveID}`);
       router.push("/ticket/:id");
       router.go();
     },
@@ -92,7 +85,6 @@ h1 {
   font-family: "Prompt", sans-serif;
 }
 div {
-  /* background-color: none; */
   font-family: "Prompt", sans-serif;
 }
 .vue-typer {
@@ -118,90 +110,89 @@ div {
 .go {
   margin-bottom: -1250px;
 }
-/* Lazy Load Styles */
+
 .card-image {
-	display: block;
-	min-height: 20rem; /* layout hack */
-	background: #fff center center no-repeat;
-	background-size: cover;
-	filter: blur(3px); /* blur the lowres image */
+  display: block;
+  min-height: 20rem;
+  background: #fff center center no-repeat;
+  background-size: cover;
+  filter: blur(3px);
 }
 
 .card-image > img {
-	display: block;
-	width: 100%;
-	opacity: 0; /* visually hide the img element */
+  display: block;
+  width: 100%;
+  opacity: 0;
 }
 
 .card-image.is-loaded {
-	filter: none; /* remove the blur on fullres image */
-	transition: filter 1s;
+  filter: none;
+  transition: filter 1s;
 }
 
-
-
-
-/* Layout Styles */
-html, body {
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	font-size: 16px;
-	font-family: sans-serif;
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-size: 16px;
+  font-family: sans-serif;
 }
 
 .card-list {
-	display: block;
-	margin: 1rem auto;
-	padding: 0;
-	font-size: 0;
-	text-align: center;
-	list-style: none;
+  display: block;
+  margin: 1rem auto;
+  padding: 0;
+  font-size: 0;
+  text-align: center;
+  list-style: none;
 }
 
 .card {
-	display: inline-block;
-	width: 90%;
-	max-width: 20rem;
-	margin: 1rem;
-	font-size: 1rem;
-	text-decoration: none;
-	overflow: hidden;
-	box-shadow: 0 0 3rem -1rem rgba(0,0,0,0.5);
-	transition: transform 0.1s ease-in-out, box-shadow 0.1s;
+  display: inline-block;
+  width: 90%;
+  max-width: 20rem;
+  margin: 1rem;
+  font-size: 1rem;
+  text-decoration: none;
+  overflow: hidden;
+  box-shadow: 0 0 3rem -1rem rgba(0, 0, 0, 0.5);
+  transition: transform 0.1s ease-in-out, box-shadow 0.1s;
 }
 
 .card:hover {
-	transform: translateY(-0.5rem) scale(1.0125);
-	box-shadow: 0 0.5em 3rem -1rem rgba(0,0,0,0.5);
+  transform: translateY(-0.5rem) scale(1.0125);
+  box-shadow: 0 0.5em 3rem -1rem rgba(0, 0, 0, 0.5);
 }
 
 .card-description {
-	display: block;
-	padding: 1em 0.5em;
-	color: #515151;
-	text-decoration: none;
+  display: block;
+  padding: 1em 0.5em;
+  color: #515151;
+  text-decoration: none;
 }
 
 .card-description > h2 {
-	margin: 0 0 0.5em;
+  margin: 0 0 0.5em;
 }
 
 .card-description > p {
-	margin: 0;
+  margin: 0;
 }
-.buttongo{
-  
-  width:100%;
+.buttongo {
+  width: 100%;
   height: 100%;
 }
 
-.card-body{
-  background-color:rgba(255, 255, 255, 0);
+.card-body {
+  background-color: rgba(255, 255, 255, 0);
 }
 
-.bg{
-  background-color:black;
+.bg {
+  background-color: black;
 }
+
+
+
 
 </style>
