@@ -106,7 +106,7 @@ body {
 }
 
 .is-link:active {
-  pointer-events: none;
+  pointer-events: none !important;
 }
 .btn.disabled,
 .btn[disabled],
