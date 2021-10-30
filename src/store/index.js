@@ -34,7 +34,6 @@ export default new Vuex.Store({
 
     },
   },
-  modules: {},
   getters: {
     getMovie: (state) => state.movie,
   },

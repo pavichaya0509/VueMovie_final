@@ -76,14 +76,12 @@ export default {
   data() {
     return {
       movie: null,
-      movieTH: null,
       movieId: "",
       selectSeats: [],
       firebaseSeats: [],
       status: { count: 0, price: 0 },
     };
   },
-  computed: {},
   methods: {
     handleChooseMovie(movieId) {
       if (this.status.count) {
